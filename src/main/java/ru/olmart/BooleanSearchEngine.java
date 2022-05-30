@@ -64,9 +64,7 @@ public class BooleanSearchEngine implements SearchEngine {
     }
 
     private List<File> getFilesList (File dirName) {
-
         List<File> fileList = new ArrayList<>();
-
         for (File file : dirName.listFiles()) {
             if (file.isFile()) {
                 fileList.add(file);

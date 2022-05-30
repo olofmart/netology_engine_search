@@ -1,5 +1,7 @@
 package ru.olmart;
 
+import java.util.Objects;
+
 public class PageEntry implements Comparable<PageEntry> {
     private final String pdfName;
     private final int page;
@@ -41,6 +43,19 @@ public class PageEntry implements Comparable<PageEntry> {
                 ", page=" + page +
                 ", count=" + count +
                 '}';// + "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PageEntry pageEntry = (PageEntry) o;
+        return page == pageEntry.page && count == pageEntry.count && pdfName.equals(pageEntry.pdfName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pdfName, page, count);
     }
 }
 
