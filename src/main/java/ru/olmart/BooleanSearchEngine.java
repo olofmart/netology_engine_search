@@ -28,27 +28,24 @@ public class BooleanSearchEngine implements SearchEngine {
                     if (indexesMap.containsKey(entry.getKey())) {
                         List<PageEntry> tmpList = indexesMap.get(entry.getKey());
                         tmpList.add(new PageEntry(file.getName(), page, entry.getValue()));
+                        Collections.sort(tmpList);
                         indexesMap.put(entry.getKey(), tmpList);
                         continue;
                     }
-
                     List<PageEntry> tmpList = new ArrayList<>();
                     tmpList.add(new PageEntry(file.getName(), page, entry.getValue()));
                     indexesMap.put(entry.getKey(), tmpList);
                 }
-
             }
         }
     }
 
     @Override
     public List<PageEntry> search(String word) {
-        List<PageEntry> list = indexesMap.entrySet()
-                .stream()
-                .filter(set -> set.getKey().equals(word))
-                .flatMap(m -> m.getValue().stream())
-                .sorted((e1, e2) -> e1.compareTo(e2))
-                .collect(Collectors.toList());
+        List<PageEntry> list = indexesMap.get(word);
+//                .stream()
+//                .sorted((e1, e2) -> e1.compareTo(e2))
+//                .collect(Collectors.toList());
         return list;
     }
 
